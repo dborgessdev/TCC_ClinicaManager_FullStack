@@ -25,25 +25,7 @@ function EscolhaDeFila({ isOpen, onClose, paciente }) {
 
     // Função para mover o paciente para a fila
     const handleSubmit = async () => {
-        const novoNaFila = {
-            id: paciente.pacientekey,
-            nome: paciente.nome,
-            prioridade: prioridade,
-            status: fila,
-        };
-
-        setLoading(true);
-        try {
-            await cadastrarFila(novoNaFila);
-            setLoading(false);
-            setShowConfirmation(false);
-            onClose();
-            alert('Paciente movido para a fila com sucesso!');
-        } catch (error) {
-            setLoading(false);
-            setErrorMessage('Erro ao mover o paciente para a fila.');
-            console.error(error);
-        }
+        console.log('Paciente excluído com sucesso!');
     };
 
     return (

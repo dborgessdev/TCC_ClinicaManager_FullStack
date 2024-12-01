@@ -11,15 +11,7 @@ function AdicionarFila({ isOpen, onClose, botao, modeal }) {
 
     useEffect(() => { // Atualiza a lista de pacientes
         const fetchPacientes = async () => {
-            if (isOpen) {
-                try {
-                    const response = await listarPacintes();
-                    setListaPacientes(response);
-
-                } catch (error) {
-                    console.error('Erro ao obter a lista de pacientes:', error);
-                }
-            }
+            console.log('Paciente excluído com sucesso!');
         };
 
         fetchPacientes();

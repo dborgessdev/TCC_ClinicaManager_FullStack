@@ -4,7 +4,7 @@ from .models import Pacient, Doctor, Nurse, Queue, Reception, Consultation
 class PacientForm(forms.ModelForm):
     class Meta:
         model = Pacient
-        fields = ['name', 'birth_date', 'cpf', 'phone_number']
+        fields = ['name', 'cpf', 'birth_date', 'email', 'photo', 'phone_number', 'observations']
 
 class DoctorForm(forms.ModelForm):
     class Meta:

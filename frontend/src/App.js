@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/menu" element={<MenuPrincipal />} />
-        <Route path="/cadastro" element={<Cadastro />} /> {/*Lembre-se de importar a pagina de cadastro*/}
+        <Route path="/cadastro" element={<Cadastro />} />
         {/*<Route path="*" element={<NotFound />} />*/} {/* Rota para página 404 */} {/*Lembra de fazer a pagina de erro 404 n esquecer de forma nehuma */}
       </Routes>
     </Router>

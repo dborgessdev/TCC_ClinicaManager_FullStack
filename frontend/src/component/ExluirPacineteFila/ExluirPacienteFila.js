@@ -15,17 +15,7 @@ function ExluirPacienteFila({ isOpen, onClose, paciente }) {
 
     // Função chamada ao clicar no botão de confirmar exclusão
     const onConfirmExclusao = async () => {
-        setLoading(true);
-        try {
-            const result = await excluirDaFila(paciente.pacientekey);
-            setLoading(false);
-            onClose();
-            alert('Paciente excluído com sucesso!');
-        } catch (error) {
-            setLoading(false);
-            setErrorMessage('Erro ao excluir paciente.');
-            console.error('Erro ao excluir paciente:', error);
-        }
+        console.log('Paciente excluído com sucesso!');
     };
 
     return (

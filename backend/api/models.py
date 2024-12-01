@@ -16,7 +16,7 @@ class Base(models.Model):
 class Pacient(Base):
     """Modelo representando os pacientes."""
     name = models.CharField("Nome", max_length=255)
-    cpf = models.CharField("CPF", max_length=11, unique=True)
+    cpf = models.CharField("CPF", max_length=14, unique=True)
     birth_date = models.DateField("Data de Nascimento")
     email = models.EmailField("E-mail", null=True, blank=True)
     photo = models.FileField(upload_to="images/", null=True, blank=True)
