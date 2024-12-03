@@ -48,8 +48,7 @@ def formulario_triagem_view(request, senha):
             reception.queue = queue  # Associa a triagem à fila do paciente
 
             # 3. Verifique e preencha o campo 'nurse' com o usuário logado, se necessário
-            if not reception.nurse:
-                reception.nurse = request.user  # Preenche com o usuário logado, se necessário
+            ##    reception.nurse = request.user  # Preenche com o usuário logado, se necessário
 
             reception.save()  # Salve o Reception
 

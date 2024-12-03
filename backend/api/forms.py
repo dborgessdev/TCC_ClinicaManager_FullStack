@@ -20,7 +20,7 @@ class NurseForm(forms.ModelForm):
 class QueueForm(forms.ModelForm):
     class Meta:
         model = Queue
-        fields = ['pacient', 'nurse', 'priority', 'status']
+        fields = ['pacient', 'nurse', 'comorbidities', 'status']
 
 class TriagemForm(forms.ModelForm):
     class Meta:

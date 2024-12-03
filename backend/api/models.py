@@ -70,13 +70,22 @@ class Queue(models.Model):
         ('finalizado', 'Finalizado'),
     ]
 
+    # Opções de comorbidades
+    COMORBIDITIES_CHOICES = [
+        ('visuais', 'Necessidades Visuais'),
+        ('fisicas', 'Necessidades Físicas'),
+        ('mental', 'Necessidades Mentais'),
+        ('oncologico', 'Paciente Oncológico'),
+        ('outros', 'Outros'),
+    ]
+
     # Campos existentes
     pacient = models.ForeignKey('Pacient', on_delete=models.CASCADE)
     doctor = models.ForeignKey('Doctor', on_delete=models.SET_NULL, null=True, blank=True)
     nurse = models.ForeignKey('Nurse', on_delete=models.SET_NULL, null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pre_triagem')
     senha = models.CharField(max_length=20, blank=True, editable=False)
-    priority = models.IntegerField(default=0)
+    comorbidities = models.CharField(max_length=20, choices=COMORBIDITIES_CHOICES, null=True, blank=True)
     date_created = models.DateTimeField(default=timezone.now)
     time_called = models.TimeField(null=True, blank=True)
     observations = models.TextField(blank=True, null=True)

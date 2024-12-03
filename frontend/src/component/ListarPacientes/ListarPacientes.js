@@ -1,7 +1,7 @@
 import style from './ListarPacientes.module.css';
 import Botao from '../Botao/Botao';
 import { useState, useEffect } from 'react';
-import { listarPacintes } from '../../service/API_function';
+import { listarPacintes, listaEnfermeiros } from '../../service/API_function';
 import PacientesFilaUnitario from '../PacientesFilaUnitario/PacientesFilaUnitario';
 import Imput from '../Imput/Imput';
 
@@ -9,13 +9,21 @@ function AdicionarFila({ isOpen, onClose, botao, modeal }) {
     const [listaPacientes, setListaPacientes] = useState([]);
     const [termoPesquisa, setTermoPesquisa] = useState('');
 
-    useEffect(() => { // Atualiza a lista de pacientes
-        const fetchPacientes = async () => {
-            console.log('Paciente excluído com sucesso!');
-        };
-
-        fetchPacientes();
+    useEffect(() => {
+        if (isOpen) { // Executa apenas quando o modal está aberto
+            const fetchPacientes = async () => {
+                try {
+                    const pacientes = await listarPacintes();
+                    setListaPacientes(pacientes);
+                } catch (error) {
+                    console.error('Erro ao buscar pacientes:', error);
+                }
+            };
+    
+            fetchPacientes();
+        }
     }, [isOpen]);
+    
 
     const handleInputChange = (e) => {
         setTermoPesquisa(e.target.value);
@@ -24,10 +32,11 @@ function AdicionarFila({ isOpen, onClose, botao, modeal }) {
     const pacientesFiltrados = listaPacientes.filter((paciente) => {
         const termoLower = termoPesquisa.toLowerCase();
         return (
-            paciente.nome.toLowerCase().includes(termoLower) || 
-            paciente.cpf.includes(termoPesquisa)
+            (paciente.name && paciente.name.toLowerCase().includes(termoLower)) || 
+            (paciente.cpf && paciente.cpf.includes(termoPesquisa))
         );
     });
+    
 
     return (
         <>
@@ -51,8 +60,8 @@ function AdicionarFila({ isOpen, onClose, botao, modeal }) {
                                             <PacientesFilaUnitario
                                                 key={index}
                                                 cpf={paciente.cpf}
-                                                nome={paciente.nome}
-                                                dataNasc={paciente.dataNasc}
+                                                nome={paciente.name}
+                                                dataNasc={paciente.birth_date}
                                                 pacientekey={paciente.id}
                                                 botao={botao}
                                                 modeal={modeal}

@@ -1,6 +1,6 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from ..forms import PacientForm
+from ..forms import PacientForm, DoctorForm, NurseForm, QueueForm
 import logging
 import json
 
