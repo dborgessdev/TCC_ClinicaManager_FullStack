@@ -1,6 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from rest_framework import viewsets
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from ..serializers import QueueSerializer
+
 
 from ..forms import TriagemForm
 from ..models import Reception, Queue
@@ -10,16 +15,20 @@ class ReceptionViewSet(viewsets.ModelViewSet):
     queryset = Reception.objects.all()
     serializer_class = ReceptionSerializer
 
+@api_view(['GET'])
 def pre_triagem_view(request):
-    """Renderiza a página com a lista de pacientes aguardando pré-triagem."""
+    """Retorna a lista de pacientes aguardando pré-triagem em formato JSON."""
     if request.method == "GET":
         # Busca todos os objetos Queue com status 'pre_triagem'
         queues = Queue.objects.filter(status='pre_triagem').order_by('-date_created')
 
-        # Renderiza o template e passa os dados como contexto
-        return render(request, "pre_triagem.html", {"queues": queues})
+        # Serializa os dados utilizando o QueueSerializer
+        serializer = QueueSerializer(queues, many=True)
+
+        # Retorna a lista de objetos em formato JSON
+        return Response(serializer.data)
     else:
-        # Para outros métodos, retornar erro
+        # Para outros métodos, retorna erro
         return JsonResponse({"error": "Método não permitido."}, status=405)
 
 def iniciar_triagem_view(request):

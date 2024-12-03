@@ -1,5 +1,7 @@
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view
 from django.http import JsonResponse
+from ..serializers import QueueSerializer
 from ..forms import PacientForm, DoctorForm, NurseForm, QueueForm
 import logging
 import json
@@ -47,12 +49,18 @@ def cadastrar_enfermeiro(request):
             return JsonResponse({"status": "error", "errors": form.errors}, status=400)
     return JsonResponse({"status": "error", "message": "Método não permitido"}, status=405)
 
+@api_view(["POST"])
 def cadastrar_atendimento(request):
-    if request.method == "POST":
-        form = QueueForm(request.POST)
-        if form.is_valid():
-            atendimento = form.save()
-            return JsonResponse({"status": "success", "message": "Atendimento cadastrado com sucesso!", "atendimento": {"id": atendimento.id, "status": atendimento.get_status_display()}})
-        else:
-            return JsonResponse({"status": "error", "errors": form.errors}, status=400)
-    return JsonResponse({"status": "error", "message": "Método não permitido"}, status=405)
+    serializer = QueueSerializer(data=request.data)
+    if serializer.is_valid():
+        atendimento = serializer.save()
+        return JsonResponse({
+            "status": "success",
+            "message": "Atendimento cadastrado com sucesso!",
+            "atendimento": {
+                "id": atendimento.id,
+                "status": atendimento.get_status_display(),
+            },
+        }, status=201)
+    else:
+        return JsonResponse({"status": "error", "errors": serializer.errors}, status=400)

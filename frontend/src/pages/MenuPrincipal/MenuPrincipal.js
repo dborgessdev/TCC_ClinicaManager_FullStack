@@ -4,12 +4,15 @@ import Fila from '../../component/fila/Fila';
 import CadastrarPaciente from '../../component/CadastrarPaciente/CadastrarPaciente';
 import { useState } from 'react';
 import ListarPacientes from '../../component/ListarPacientes/ListarPacientes';
+import { getFilaPreTriagem } from '../../service/API_function';
+import { useNavigate } from 'react-router-dom';
 
 function MenuPrincipal() {
     const [modalOpen, setModalOpen] = useState(false);
     const [modalOpen2, setModalOpen2] = useState(false);
     const [modalOpen3, setModalOpen3] = useState(false);
     const [modalOpen4, setModalOpen4] = useState(false);
+    const navigate = useNavigate();
 
     const toggleModal = () => {
         setModalOpen(!modalOpen);
@@ -32,10 +35,10 @@ function MenuPrincipal() {
         <div className={style.container}>
             <div className={style.navebar}>
                 <div className={style.logo}>
-                    FilaFácil™
+                    GIAC™
                 </div>
                 <div className={style.user}>
-                    <a>Home</a>
+                    <a href='/painel-senha'>Home</a>
                     <a>Novo Admin</a>
                     <a></a>
                 </div>
@@ -49,8 +52,8 @@ function MenuPrincipal() {
                 </div>
                 <div className={style.container2}>
                     <div className={style.filas}>
-                        <Fila titulo={"Triagem"}/>
-                        <Fila titulo={"Pediatria"}/>
+                        <Fila titulo={"Triagem"} funcao={getFilaPreTriagem}/>
+                        <Fila titulo={"Atendimento"}/>
                         <Fila titulo={"Medico"} />
                     </div>
                     <div className={style.detalhes}>

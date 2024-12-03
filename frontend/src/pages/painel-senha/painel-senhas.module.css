@@ -1,0 +1,41 @@
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.painel-senhas {
+  height: 100%;
+  padding: 50px;
+  background: #FAFBFF;
+}
+
+.quadardo {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+}
+
+.quadradoSenha {
+  width: 862px;
+  height: 924px;
+  padding: 30px 0px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.relogio {
+  margin-bottom: 40px;
+}
+
+@media (max-height: 900px) {
+  .quadradoSenha {
+    height: 739px;
+    width: 739px;
+  }
+}
+
+
