@@ -16,7 +16,7 @@ class Base(models.Model):
 class Pacient(Base):
     """Modelo representando os pacientes."""
     name = models.CharField("Nome", max_length=255)
-    cpf = models.CharField("CPF", max_length=11, unique=True)
+    cpf = models.CharField("CPF", max_length=14, unique=True)
     birth_date = models.DateField("Data de Nascimento")
     email = models.EmailField("E-mail", null=True, blank=True)
     photo = models.FileField(upload_to="images/", null=True, blank=True)
@@ -70,13 +70,22 @@ class Queue(models.Model):
         ('finalizado', 'Finalizado'),
     ]
 
+    # Opções de comorbidades
+    COMORBIDITIES_CHOICES = [
+        ('visuais', 'Necessidades Visuais'),
+        ('fisicas', 'Necessidades Físicas'),
+        ('mental', 'Necessidades Mentais'),
+        ('oncologico', 'Paciente Oncológico'),
+        ('outros', 'Outros'),
+    ]
+
     # Campos existentes
     pacient = models.ForeignKey('Pacient', on_delete=models.CASCADE)
     doctor = models.ForeignKey('Doctor', on_delete=models.SET_NULL, null=True, blank=True)
     nurse = models.ForeignKey('Nurse', on_delete=models.SET_NULL, null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pre_triagem')
     senha = models.CharField(max_length=20, blank=True, editable=False)
-    priority = models.IntegerField(default=0)
+    comorbidities = models.CharField(max_length=20, choices=COMORBIDITIES_CHOICES, null=True, blank=True)
     date_created = models.DateTimeField(default=timezone.now)
     time_called = models.TimeField(null=True, blank=True)
     observations = models.TextField(blank=True, null=True)

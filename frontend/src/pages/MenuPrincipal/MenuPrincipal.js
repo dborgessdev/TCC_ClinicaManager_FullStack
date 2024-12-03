@@ -3,7 +3,6 @@ import Botao from '../../component/Botao/Botao';
 import Fila from '../../component/fila/Fila';
 import CadastrarPaciente from '../../component/CadastrarPaciente/CadastrarPaciente';
 import { useState } from 'react';
-import { mostraFilaTriagem, mostraFilaPediatria, mostraFilaMedico } from '../../service/API_function';
 import ListarPacientes from '../../component/ListarPacientes/ListarPacientes';
 
 function MenuPrincipal() {
@@ -50,9 +49,9 @@ function MenuPrincipal() {
                 </div>
                 <div className={style.container2}>
                     <div className={style.filas}>
-                        <Fila titulo={"Triagem"} funcao={mostraFilaTriagem}/>
-                        <Fila titulo={"Pediatria"} funcao={mostraFilaPediatria}/>
-                        <Fila titulo={"Medico"} funcao={mostraFilaMedico} />
+                        <Fila titulo={"Triagem"}/>
+                        <Fila titulo={"Pediatria"}/>
+                        <Fila titulo={"Medico"} />
                     </div>
                     <div className={style.detalhes}>
                         Para um bom funcionamento organização é essencial

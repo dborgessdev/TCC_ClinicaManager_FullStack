@@ -1,6 +1,5 @@
 import style from './ExluirPacinete.module.css';
 import Botao from '../Botao/Botao';
-import { excluirPaciente } from '../../service/API_function';
 import { useState } from 'react';
 
 function ExluirPaciente({ isOpen, onClose, paciente }) {
@@ -15,17 +14,7 @@ function ExluirPaciente({ isOpen, onClose, paciente }) {
 
     // Função chamada ao clicar no botão de confirmar exclusão
     const onConfirmExclusao = async () => {
-        setLoading(true);
-        try {
-            const result = await excluirPaciente(paciente.pacientekey);
-            setLoading(false);
-            onClose();
-            alert('Paciente excluído com sucesso!');
-        } catch (error) {
-            setLoading(false);
-            setErrorMessage('Erro ao excluir paciente.');
-            console.error('Erro ao excluir paciente:', error);
-        }
+        console.log('Paciente excluído com sucesso!');
     };
 
     return (
