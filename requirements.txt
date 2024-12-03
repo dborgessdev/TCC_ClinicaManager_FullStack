@@ -1,7 +1,12 @@
 asgiref==3.8.1
+distlib==0.3.8
 Django==5.1.2
+django-cors-headers==4.6.0
 django-filter==24.3
 djangorestframework==3.15.2
+filelock==3.15.4
 Markdown==3.7
+platformdirs==4.2.2
 sqlparse==0.5.1
 tzdata==2024.2
+virtualenv==20.26.3
