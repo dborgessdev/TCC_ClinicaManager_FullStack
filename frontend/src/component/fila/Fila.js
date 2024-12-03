@@ -29,7 +29,7 @@ function Fila({ titulo, funcao }) {
             </div>
             <div className={style.corpo}>
                 <tr className={style.legenda}>
-                    <td className={style.legenda2}>
+                    <td className={style.legenda2}> 
                         <p>Posição</p>
                         <p>Nome</p>
                     </td>
@@ -39,7 +39,7 @@ function Fila({ titulo, funcao }) {
                     <SenhaFila
                         key={atendimento.id}
                         posicao={index + 1}
-                        nome={atendimento.nome}
+                        nome={atendimento.pacient_name}
                         senha={atendimento.senha}
                     />
                 ))}

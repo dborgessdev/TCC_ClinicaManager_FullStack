@@ -1,7 +1,9 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from rest_framework import viewsets
-
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from ..serializers import QueueSerializer
 from ..forms import ConsultaForm
 from ..models import Consultation, Queue
 from ..serializers import ConsultationSerializer
@@ -10,16 +12,20 @@ class ConsultationViewSet(viewsets.ModelViewSet):
     queryset = Consultation.objects.all()
     serializer_class = ConsultationSerializer
 
+@api_view(['GET'])
 def pre_consulta_view(request):
-    """Renderiza a página com a lista de pacientes aguardando atendimento."""
+    """Retorna a lista de pacientes aguardando pré-consulta em formato JSON."""
     if request.method == "GET":
-        # Busca todos os objetos Queue com status 'pre_atendimento'
+        # Busca todos os objetos Queue com status 'pre_atendimento' (modificado para 'pre_consulta' se necessário)
         queues = Queue.objects.filter(status='pre_atendimento').order_by('-date_created')
 
-        # Renderiza o template e passa os dados como contexto
-        return render(request, "pre_atendimento.html", {"queues": queues})
+        # Serializa os dados utilizando o QueueSerializer
+        serializer = QueueSerializer(queues, many=True)
+
+        # Retorna a lista de objetos em formato JSON
+        return Response(serializer.data)
     else:
-        # Para outros métodos, retornar erro
+        # Para outros métodos, retorna erro
         return JsonResponse({"error": "Método não permitido."}, status=405)
     
 def iniciar_consulta_view(request):

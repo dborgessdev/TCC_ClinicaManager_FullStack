@@ -13,9 +13,17 @@ class DoctorSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class QueueSerializer(serializers.ModelSerializer):
+    pacient_name = serializers.ReadOnlyField(source='pacient.name')
+
     class Meta:
         model = Queue
-        fields = '__all__'
+        fields = ['pacient', 'pacient_name', 'nurse', 'status', 'comorbidities', 'senha']
+
+    def validate_pacient(self, value):
+        # Exemplo de validação adicional
+        if Queue.objects.filter(pacient=value).exclude(status='finalizado').exists():
+            raise serializers.ValidationError("Este paciente já está em uma fila ativa!")
+        return value
 
 class ReceptionSerializer(serializers.ModelSerializer):
     class Meta:

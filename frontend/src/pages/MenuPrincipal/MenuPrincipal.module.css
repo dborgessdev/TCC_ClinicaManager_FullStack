@@ -41,11 +41,13 @@
 
 .user a {
     font-size: 24px;
+    text-decoration: none;
+    color: #000000;
 }
 
 .user a:hover {
     cursor: pointer;
-    color: #fff;
+    color: #1F7A8C;
 }
 
 .content {

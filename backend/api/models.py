@@ -13,7 +13,7 @@ class Base(models.Model):
         abstract = True
 
 
-class Pacient(Base):
+class Pacient(models.Model):
     """Modelo representando os pacientes."""
     name = models.CharField("Nome", max_length=255)
     cpf = models.CharField("CPF", max_length=14, unique=True)
