@@ -1,3 +1,62 @@
+
+# Modo html
+
+"""
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view
+from django.http import JsonResponse
+from ..forms import PacientForm, DoctorForm, NurseForm, QueueForm
+import logging
+
+logger = logging.getLogger(__name__)
+
+@csrf_exempt
+def cadastrar_paciente(request):
+    if request.method == "POST":
+        form = PacientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, "cadastro_success.html", {"message": "Paciente cadastrado com sucesso!"})
+        else:
+            return render(request, "cadastrar_paciente.html", {"form": form, "errors": form.errors})
+    return render(request, "cadastrar_paciente.html", {"form": PacientForm()})
+
+def cadastrar_medico(request):
+    if request.method == "POST":
+        form = DoctorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, "cadastro_success.html", {"message": "Médico cadastrado com sucesso!"})
+        else:
+            return render(request, "cadastrar_medico.html", {"form": form, "errors": form.errors})
+    return render(request, "cadastrar_medico.html", {"form": DoctorForm()})
+
+def cadastrar_enfermeiro(request):
+    if request.method == "POST":
+        form = NurseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, "cadastro_success.html", {"message": "Enfermeiro cadastrado com sucesso!"})
+        else:
+            return render(request, "cadastrar_enfermeiro.html", {"form": form, "errors": form.errors})
+    return render(request, "cadastrar_enfermeiro.html", {"form": NurseForm()})
+
+@csrf_exempt
+def cadastrar_atendimento(request):
+    if request.method == "POST":
+        form = QueueForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, "cadastro_success.html", {"message": "Atendimento cadastrado com sucesso!"})
+        else:
+            return render(request, "cadastrar_atendimento.html", {"form": form, "errors": form.errors})
+    return render(request, "cadastrar_atendimento.html", {"form": QueueForm()}) """
+
+
+
+#MODO JSON
+
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
@@ -64,3 +123,4 @@ def cadastrar_atendimento(request):
         }, status=201)
     else:
         return JsonResponse({"status": "error", "errors": serializer.errors}, status=400)
+
