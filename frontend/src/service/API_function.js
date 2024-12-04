@@ -25,3 +25,8 @@ export const getFilaPreTriagem = async () => {
     const response = await axiosInstance.get('/api/pre-triagem/');
     return response.data;
 };
+
+export const getFilaPreConsulta = async () => {
+    const response = await axiosInstance.get('/api/pre-consulta/');
+    return response.data;
+};
