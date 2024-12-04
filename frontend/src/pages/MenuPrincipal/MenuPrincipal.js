@@ -4,7 +4,7 @@ import Fila from '../../component/fila/Fila';
 import CadastrarPaciente from '../../component/CadastrarPaciente/CadastrarPaciente';
 import { useState } from 'react';
 import ListarPacientes from '../../component/ListarPacientes/ListarPacientes';
-import { getFilaPreTriagem } from '../../service/API_function';
+import { getFilaPreTriagem, getFilaPreConsulta } from '../../service/API_function';
 import { useNavigate } from 'react-router-dom';
 
 function MenuPrincipal() {
@@ -53,7 +53,7 @@ function MenuPrincipal() {
                 <div className={style.container2}>
                     <div className={style.filas}>
                         <Fila titulo={"Triagem"} funcao={getFilaPreTriagem}/>
-                        <Fila titulo={"Atendimento"}/>
+                        <Fila titulo={"Atendimento"} funcao={getFilaPreConsulta}/>
                         <Fila titulo={"Medico"} />
                     </div>
                     <div className={style.detalhes}>
